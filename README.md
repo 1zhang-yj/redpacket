@@ -1,22 +1,62 @@
-# redpacket
-基于微信红包模拟的分配金额初探
+# 微信红包金额分配模拟研究 / WeChat Red Packet Allocation Simulation Research
 
-写在最前面：本项目的所有代码均存储在main.m中，需要使用MATLAB运行，各位可以自行下载运行探究，下文仅为根据运行结果猜测的结论
+## 写在最前面 / Foreword
+本项目所有代码均存储在`main.m`中，需要使用MATLAB运行。  
+**All code for this project is stored in `main.m` and requires MATLAB to run.**
 
-本项目模拟微信的红包分配方式（二倍均值法）探究了第几个拆包与得到金额期望与稳定性的关系
+各位可以自行下载运行探究，下文仅为根据运行结果猜测的结论。  
+**You may download and run the code to explore. The following conclusions are based on observed experimental results.**
 
-得到以下结论
+---
 
-结论1：抢到金额的期望与第几个抢无关，且均为红包均值
+## 核心结论 / Key Findings
 
-结论2：越后抢的人越容易得到“手气最佳”，也越容易得到红包均值以下（猜测在约最后15个包生效）
+### 结论1 / Conclusion 1  
+**抢到金额的期望与第几个抢无关，均为红包均值**  
+**The expected value of the allocated amount is independent of the grabbing order and equals the mean value of the red packet.**
 
-P1-P5：千人红包大作战。
-P1明显看出来，抢到金额与第几个抢成白噪音序列，且非常的稳定，得出结论1。
-将P1升序整理，得到P2，明显看出更多的人（也就是更大概率）抢到红包的均值左右，而抢到大金额和小金额基本对称，且偏离中心越远概率越小。
-P3中，为了消除期望（量纲）对方差的影响，将方差归一化，计算了稳定性系数（期望的平方÷（期望的平方+方差）），明显得出，前面数据非常稳定，到最后15组时，稳定性断崖式下降。
-进一步分析金额偏差均值不超过20%的概率得到P4，明显得出在偏差20%的区间内，第几个抢与偏差个数无关。那么稳定性降低是由于哪些数据？
-再次分析金额偏差均值不超过80%的概率得到P5，后抢很明显使偏差率升高，这也就是稳定性降低的来源。图中的蓝圈代表不超过180%的概率，红圈代表不低于20%的概率，仔细比较得出（特意多运行了几遍，还真不是偶然事件）出现极大红包的概率比出现极小红包的概率多，但是上文又已说明他们的金额期望是相等的，所以可以猜测，后抢红包（最后15个）更有可能得到极大红包，但有更大概率得到比均值略小的红包（这样才能拉低期望）。得到结论2。
+### 结论2 / Conclusion 2  
+**越后抢的人越容易获得"手气最佳"，也更可能获得低于均值的金额（约最后15个红包生效）**  
+**Later grabbers have higher probabilities of becoming the "luckiest" and receiving amounts below the mean (observed in the last ~15 packets).**
 
-P6-P7结论验证：5人抢500元红包。
-P6得出稳定性逐渐下降，P7得出上下±80%区间内的概率减小。结论1、2得证。
+---
+
+## 实验分析 / Experimental Analysis
+
+### P1-P5：千人红包大作战 / P1-P5: 1000-User Red Packet Campaign
+1. **P1**  
+   - 金额与抢包顺序呈白噪音序列，验证结论1  
+   - **Amounts vs. grabbing order form a white noise sequence, validating Conclusion 1**
+
+2. **P2（P1升序整理）**  
+   - 金额分布以均值为中心对称，偏离越远概率越小  
+   - **Sorted data shows symmetric distribution around the mean with decreasing probabilities for extreme values**
+
+3. **P3（方差归一化分析）**  
+   - 最后15组稳定性断崖式下降（稳定性系数 = 期望²/(期望²+方差)）  
+   - **Normalized variance analysis reveals a cliff-like stability drop in the last 15 groups (Stability Coefficient = E²/(E² + Var))**
+
+4. **P4（20%偏差区间）**  
+   - 偏差≤20%的概率与抢包顺序无关  
+   - **Probability of ≤20% deviation is order-independent**
+
+5. **P5（80%偏差区间）**  
+   - 后抢者偏差率显著升高（蓝圈: ≤180%概率，红圈: ≥20%概率）  
+   - **Later grabbers show higher deviation rates (Blue: ≤180%, Red: ≥20%)**
+
+---
+
+### P6-P7：结论验证 / P6-P7: Validation
+#### 5人抢500元红包 / 5-User 500 CNY Red Packet
+- **P6**: 稳定性随抢包顺序逐渐下降  
+  **Stability gradually decreases with grabbing order**
+- **P7**: ±80%偏差区间概率减小，结论得证  
+  **Reduced probabilities in ±80% deviation range validate conclusions**
+
+---
+
+## 运行建议 / Usage Notes
+1. 多次运行可复现稳定性模式（非随机现象）  
+   **Multiple runs reproduce stability patterns (non-random)**
+2. 代码支持自定义参数：`总金额`、`人数`、`模拟次数`  
+   **Customizable parameters: `Total Amount`, `Number of Users`, `Simulation Runs`**
