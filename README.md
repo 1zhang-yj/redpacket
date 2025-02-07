@@ -58,8 +58,8 @@
 ## 运行建议 / Usage Notes
 1. 多次运行可复现稳定性模式（非随机现象）  
    **Multiple runs reproduce stability patterns (non-random)**
-2. 代码支持自定义参数：`总金额`、`人数`、`模拟次数`  
-   **Customizable parameters: `Total Amount`, `Number of Users`, `Simulation Runs`**
+2. 代码支持自定义参数：`总金额`、`人数`、`模拟轮数`
+   **Customizable parameters: `packetnum`, `peoplenum`, `roundnum`**
    
 ---
 
