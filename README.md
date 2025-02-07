@@ -60,3 +60,11 @@
    **Multiple runs reproduce stability patterns (non-random)**
 2. 代码支持自定义参数：`总金额`、`人数`、`模拟次数`  
    **Customizable parameters: `Total Amount`, `Number of Users`, `Simulation Runs`**
+   
+---
+
+## 联系作者 / Contact
+邮箱 / Email：zhang.ershi@qq.com 
+
+微信号 / WeChat ID：zhang_tjnk
+
